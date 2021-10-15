@@ -27,23 +27,27 @@ function setTheme(val) {
 
 function setDarkTheme() {
   //set dark theme
-  refs.body.classList.remove(Theme.LIGHT);
-  refs.body.classList.add(Theme.DARK);
+  themeClassList(Theme.DARK, Theme.LIGHT);
   localStorage.setItem('themeOnFood', JSON.stringify({ theme: 'dark' })); //save to local storage
 }
 
 function setLightTheme() {
   //set light theme
-  refs.body.classList.remove(Theme.DARK);
-  refs.body.classList.add(Theme.LIGHT);
+  themeClassList(Theme.LIGHT, Theme.DARK);
   localStorage.removeItem('themeOnFood'); //save to local storage
+}
+
+function themeClassList(add, remove) {
+  //replace class on body
+  refs.body.classList.add(add);
+  refs.body.classList.remove(remove);
 }
 
 function themeSwither(evt) {
   //switch theme after change status on theme input check
-  if (evt.target.checked === true) {
+  if (evt.target.checked) {
     setTheme('dark');
-  } else if (evt.target.checked === false) {
+  } else {
     setTheme('light');
   }
 }
